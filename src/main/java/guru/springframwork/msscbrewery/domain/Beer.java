@@ -3,6 +3,7 @@ package guru.springframwork.msscbrewery.domain;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -19,8 +20,9 @@ import java.util.UUID;
 public class Beer {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUID.Generator")
-    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Type(type="org.hibernate.type.UUIDCharType")
+    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID id;
 
     @Version
@@ -29,11 +31,11 @@ public class Beer {
     private String beerStyle;
 
     @Column(updatable = false)
-    private Long ups;
+    private String upc;
 
     private BigDecimal price;
     private Integer minOnHand;
-    private Integer qualityToBrew;
+    private Integer quantityToBrew;
 
     @CreationTimestamp
     @Column(updatable = false)
