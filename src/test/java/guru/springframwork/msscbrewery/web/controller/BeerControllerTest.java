@@ -77,6 +77,7 @@ class BeerControllerTest {
     BeerDto getValidBeerDto() {
         return BeerDto.builder()
                 .id(UUID.randomUUID())
+                .version(2)
                 .beerName("My beer")
                 .beerStyle(BeerStyleEnum.ALE)
                 .price(new BigDecimal("2.99"))
