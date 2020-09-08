@@ -2,6 +2,7 @@ package guru.springframwork.msscbrewery.web.controller;
 
 import guru.springframwork.msscbrewery.service.BeerService;
 import guru.springframwork.msscbrewery.web.model.BeerDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/beer")
 @RestController
 public class BeerController {
+
+    @Autowired
+    private final BeerService beerService;
 
     @GetMapping({"/{beerId}"})
     public ResponseEntity<BeerDto> getBeer(@PathVariable("beerId") UUID beerId) {
@@ -27,17 +32,17 @@ public class BeerController {
 
     @PostMapping
     public ResponseEntity handlePost(@Validated @RequestBody BeerDto beer) {
-        /*BeerDto beerDto = beerService.newBeer(beer);
+        BeerDto beerDto = beerService.newBeer(beer);
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Location", "/api/v1/beer/" + beerDto.getId().toString());*/
+        httpHeaders.add("Location", "/api/v1/beer/" + beerDto.getId().toString());
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PutMapping({"/{beerId}"})
     public ResponseEntity handlePut(@PathVariable("beerId") UUID beerId, @Validated @RequestBody BeerDto beerDto) {
-        //beerService.updateBeer(beerId, beerDto);
+        beerService.updateBeer(beerId, beerDto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 

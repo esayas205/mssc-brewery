@@ -5,6 +5,7 @@ import guru.springframwork.msscbrewery.repositories.BeerRepository;
 import guru.springframwork.msscbrewery.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -34,7 +35,7 @@ public class BeerLoader implements CommandLineRunner {
                 .minOnHand(12)
                 .quantityToBrew(200)
                 .price(new BigDecimal("12.95"))
-                .upc(BEER_1_UPC)
+                .upc(1233432234324L)
                 .build();
 
         Beer b2 = Beer.builder()
@@ -43,7 +44,7 @@ public class BeerLoader implements CommandLineRunner {
                 .minOnHand(12)
                 .quantityToBrew(200)
                 .price(new BigDecimal("12.95"))
-                .upc(BEER_2_UPC)
+                .upc(1233432234324L)
                 .build();
 
         Beer b3 = Beer.builder()
@@ -52,10 +53,12 @@ public class BeerLoader implements CommandLineRunner {
                 .minOnHand(12)
                 .quantityToBrew(200)
                 .price(new BigDecimal("12.95"))
-                .upc(BEER_3_UPC)
+                .upc(1233432234324L)
                 .build();
 
         beerRepository.save(b1);
+        System.out.println("# of beers: " + b1.getId());
+
         beerRepository.save(b2);
         beerRepository.save(b3);
 
